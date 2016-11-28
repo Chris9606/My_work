@@ -13,7 +13,7 @@ REVERSE_SENTENCE(sentence)
             start <-- end                             O(n?)
         end <-- end + 1                               O(n)
 
-    for i <-- len(container)-1 to -1 by -1            O(n)
+    for i <-- length(container)-1 to -1 by -1            O(n)
         rev_sent <-- rev_sent + container[i]          O(n)
     return rev_sent                                   O(1)
 
