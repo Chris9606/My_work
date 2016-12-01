@@ -20,7 +20,9 @@ BINARY_SEARCH_RANGE(alist, range_f, range_l)      // Searches for a value within
         count <-- count + 1
         if count > length[alist] / 2
             return found
-
+            
+            
+The Big (O) notation is : -----log(n)-------
 """
 
 def binarySearch_range(alist, range_f, range_l):              # Searches for a value within a specific interval (range_f = range from -/- range_l = range last
