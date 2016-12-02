@@ -78,8 +78,8 @@ class Graph:
 
     def Dijkstra(self,start,end, all_vertex = keys, vertex_edges = edge_matrix):
         table = [[],[],[],[]]   # Table containing : Vertex  |  Known |  Cost  |  Path  |
-        visited = []
-        queue = []
+        visited = []            #                       1         F        0       -1
+        queue = []              #                       2         F       INF      -1
         vertex_paths = []
         current_vertex = start
 
@@ -94,24 +94,27 @@ class Graph:
         queue.insert(0,current_vertex)
         while False in table[1]:
             table[1][all_vertex.index(current_vertex)] = True  # Finalize the vertex
-            #print (table)        #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            for edge in vertex_edges[all_vertex.index(current_vertex)]:
-                print (all_vertex[vertex_edges[all_vertex.index(current_vertex)].index(edge)])
-                print (table)
-                print (queue)
+            for edge in vertex_edges[all_vertex.index(current_vertex)]:      # For every edge the current_vertex has
 
                 if edge != -1 and  all_vertex[vertex_edges[all_vertex.index(current_vertex)].index(edge)] not in visited:
+                    # If there is an edge and if the vertex on the other side of the edge is not visited
 
-                    #print(all_vertex.index(vertex_edges.index(edge)))
                     visited.append(all_vertex[vertex_edges[all_vertex.index(current_vertex)].index(edge)])
                     queue.insert(0, all_vertex[vertex_edges[all_vertex.index(current_vertex)].index(edge)])
-                    #print (queue)      #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                     if table[2][all_vertex.index(edge)] > table[2][all_vertex.index(current_vertex)]  +  vertex_edges[current_vertex][edge]:      # If  (tentative weight of the vertex) > (current_vertex(cost) + edge(cost)
-                        table[2][all_vertex.index(edge)] = vertex_edges[current_vertex][edge]
+                        table[2][all_vertex.index(edge)] = vertex_edges[current_vertex][edge]                                                     # Update the tentative weight if the vertex
                 else:
                     continue
-            queue.pop()
-            current_vertex = queue[0]
+            queue.pop()                      # Pop the current vertex of th queue
+            current_vertex = queue[0]        # Assign the current vertex the the next item in the queue
+
+            for vertex in all_vertex:     # Traces back each vertex shortest path and stores it
+                Vertex_Path= []
+                current_vertex = vertex
+                while current_vertex != all_vertex[0]:
+                    Vertex_Path.append(current_vertex)
+                    #current_vertex.previous
+                vertex_paths.append(Vertex_Path)
 
 
 if __name__ == '__main__':
@@ -145,7 +148,3 @@ if __name__ == '__main__':
     G.depth_first()
 
    # G.Dijkstra(1,9)
-
-
-
-
